@@ -1,5 +1,6 @@
 package com.example.kira.consumirapi;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,17 +51,18 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<List<Item>>() {
             @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+            public void onResponse(@NonNull Call<List<Item>> call, @NonNull Response<List<Item>> response) {
                 if (response.isSuccessful()){
                     itemList = response.body();
                     itemsAdapter.adicionarListaItems(itemList);
+                    //creo que de aqui esta mal
                 } else {
                     Log.e(TAG, "onResponse: " + response.errorBody());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Item>> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
